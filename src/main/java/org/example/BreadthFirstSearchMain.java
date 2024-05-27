@@ -6,20 +6,20 @@ public class BreadthFirstSearchMain {
     public static void main(String[] args) {
         //Реализация алгоитма из книги "Грокаем алгоритмы"
         Hashtable<String, String[]> table = new Hashtable<>();
-        String[] yourFrineds = new String[] {"alice", "bob", "claire"};
+        String[] yourFrineds = new String[]{"alice", "bob", "claire"};
         table.put("you", yourFrineds);
-        String[] bobFriends = new String[] {"anuj","peggy"};
+        String[] bobFriends = new String[]{"anuj", "peggy"};
         table.put("bob", bobFriends);
-        String[] aliceFrinds = new String[] {"peggy"};
+        String[] aliceFrinds = new String[]{"peggy"};
         table.put("alice", aliceFrinds);
-        String[] claireFriends = new String[] {"thom", "jonny"};
+        String[] claireFriends = new String[]{"thom", "jonny"};
         table.put("claire", claireFriends);
         String[] empty = new String[0];
         table.put("anuj", empty);
         table.put("peggy", empty);
         table.put("thom", empty);
         table.put("jonny", empty);
-        BFSMod graph = new BFSMod(table);
+        GraphBreadthFirstSearch graph = new GraphBreadthFirstSearch(table);
         String startFromPeople = "you";
         graph.toDecqueByPoint(startFromPeople);
         System.out.println(graph.searchSeller());
@@ -27,7 +27,7 @@ public class BreadthFirstSearchMain {
         Hashtable<String, String[]> tableWay = new Hashtable<>();
         String[] ourWay = new String[]{"автобус 82", "автобус 63"};
         tableWay.put("you", ourWay);
-        String[] from82 =new String[]{"автобус 93"};
+        String[] from82 = new String[]{"автобус 93"};
         tableWay.put("автобус 82", from82);
         String[] from93 = new String[]{"ДГТУ"};
         tableWay.put("автобус 93", from93);
@@ -35,7 +35,7 @@ public class BreadthFirstSearchMain {
         tableWay.put("автобус 63", from63);
         tableWay.put("ДГТУ", empty);
 
-        BFSMod wayToDSTU = new BFSMod(tableWay);
+        GraphBreadthFirstSearch wayToDSTU = new GraphBreadthFirstSearch(tableWay);
         String startFromPoint = "you";
         wayToDSTU.toDecqueByPoint(startFromPoint);
         wayToDSTU.searchTarget();
@@ -58,7 +58,7 @@ public class BreadthFirstSearchMain {
         String[] from8 = new String[]{"выход"};
         tableLab.put("8", from8);
 
-        BFSMod labGraph = new BFSMod(tableLab);
+        GraphBreadthFirstSearch labGraph = new GraphBreadthFirstSearch(tableLab);
         labGraph.toDecqueByPoint("you");
         labGraph.searchExit();
 
