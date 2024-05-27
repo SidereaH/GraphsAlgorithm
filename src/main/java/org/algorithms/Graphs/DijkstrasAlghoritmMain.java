@@ -1,4 +1,4 @@
-package org.example.Graphs;
+package org.algorithms.Graphs;
 
 import java.util.Hashtable;
 

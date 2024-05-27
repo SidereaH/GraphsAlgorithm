@@ -1,4 +1,4 @@
-package org.example.DynamicProgramming;
+package org.algorithms.DynamicProgramming;
 
 import java.util.Hashtable;
 import java.util.Map;

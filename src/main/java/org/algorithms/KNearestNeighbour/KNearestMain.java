@@ -1,4 +1,4 @@
-package org.example.KNearestNeighbour;
+package org.algorithms.KNearestNeighbour;
 
 import java.util.Hashtable;
 
