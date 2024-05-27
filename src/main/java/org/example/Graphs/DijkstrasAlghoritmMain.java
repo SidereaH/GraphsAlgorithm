@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Graphs;
 
 import java.util.Hashtable;
 
@@ -34,9 +34,9 @@ public class DijkstrasAlghoritmMain {
         parents.put("b", "start");
         parents.put("fin", "");
 
-        GraphDijkstra dijcstrasgraph = new GraphDijkstra(graphTable, costs, parents);
+        Graph dijcstrasgraph = new Graph(graphTable, costs, parents);
         System.out.println("До работы алгоритма: \n" + dijcstrasgraph);
-        dijcstrasgraph.Dijcstras();
+        dijcstrasgraph.Dijkstras();
         System.out.println("После работы алгоритма: \n" + dijcstrasgraph);
         //Создать функцию, которая определяет кратчайший путь от одной вершины до другой в графе, представленном в виде матрицы смежности.
         System.out.println("Преобразование матрицы");
@@ -47,11 +47,11 @@ public class DijkstrasAlghoritmMain {
                 {0,0,0,0}
         };
 
-        GraphDijkstra graphFromMatrix = new GraphDijkstra(matrix);
+        Graph graphFromMatrix = new Graph(matrix);
         graphFromMatrix.showMatrix();
         graphFromMatrix.toGraphs();
         System.out.println("До работы алгоритма: \n" + graphFromMatrix);
-        graphFromMatrix.Dijcstras();
+        graphFromMatrix.Dijkstras();
         System.out.println("После работы алгоритма: \n" + graphFromMatrix);
 
     }
