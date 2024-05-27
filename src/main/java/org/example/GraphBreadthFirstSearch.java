@@ -111,7 +111,6 @@ public class GraphBreadthFirstSearch {
         return false;
     }
 
-
     private boolean personIsSeller(String person) {
         return Objects.equals(person, "jonny");
     }

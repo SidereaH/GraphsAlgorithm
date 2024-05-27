@@ -39,13 +39,16 @@ public class DijkstrasAlghoritmMain {
         dijcstrasgraph.Dijcstras();
         System.out.println("После работы алгоритма: \n" + dijcstrasgraph);
         //Создать функцию, которая определяет кратчайший путь от одной вершины до другой в графе, представленном в виде матрицы смежности.
+        System.out.println("Преобразование матрицы");
         int[][] matrix = new int[][]{
                 {0,6,2,0},
                 {0,0,0,1},
                 {0,3,0,5},
                 {0,0,0,0}
         };
+
         GraphDijkstra graphFromMatrix = new GraphDijkstra(matrix);
+        graphFromMatrix.showMatrix();
         graphFromMatrix.toGraphs();
         System.out.println("До работы алгоритма: \n" + graphFromMatrix);
         graphFromMatrix.Dijcstras();

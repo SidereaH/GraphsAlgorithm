@@ -27,12 +27,12 @@ public class GraphDijkstra {
 
     @Override
     public String toString() {
-        for(Map.Entry<String, Hashtable<String, Integer>> entry: graphTable.entrySet()){
-            System.out.println("Ключ:" + entry.getKey());
-            for (Map.Entry<String, Integer> entryV : entry.getValue().entrySet()){
-                System.out.println(entryV.getKey() + " " + entryV.getValue());
-            }
-        }
+//        for(Map.Entry<String, Hashtable<String, Integer>> entry: graphTable.entrySet()){
+//            System.out.println("Ключ:" + entry.getKey());
+//            for (Map.Entry<String, Integer> entryV : entry.getValue().entrySet()){
+//                System.out.println(entryV.getKey() + " " + entryV.getValue());
+//            }
+//        }
         if (costs != null) {
             return String.format("""
                             Стоимости посещения вершин: %s,
@@ -115,6 +115,20 @@ public class GraphDijkstra {
             } else {
                 graphTable.put(i + "", values);
             }
+        }
+
+    }
+    public void showMatrix(){
+        if (matrix !=null){
+            for (int i =0; i<= matrix.length-1;i++){
+                for (int j =0; j<matrix[i].length; j++){
+                    System.out.print(matrix[i][j]);
+                }
+                System.out.println(" ");
+            }
+        }
+        else {
+            System.out.println("У вас нет матрицы");
         }
 
     }
