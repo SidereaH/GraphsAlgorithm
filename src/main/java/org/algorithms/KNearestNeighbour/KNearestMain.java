@@ -5,6 +5,7 @@ import java.util.Hashtable;
 public class KNearestMain {
     public static void main(String[] args) {
         Hashtable<String, double[]> iris = new Hashtable<>();
+
         //1. Задача классификации цветков ириса: дан набор данных с
         // измерениями длины
         // ширины чашелистиков лепестков ирисов,
@@ -28,10 +29,19 @@ public class KNearestMain {
 //        Ширина лепестка (см): 2.5, 1.9, 2.1, 1.8, 2.2, ...
 
           double[] params = new double[] {5, 3, 2, 4};
-          iris.put("iris", params);
-          KNearest newIris = new KNearest(iris);
+          iris.put("flower", params);
+          KNearest newIris = new KNearest(iris, "flower");
           newIris.searchNearest();
           System.out.println(newIris);
+
+        //2. Задача рекомендации фильмов: дан набор данных с оценками пользователей для различных фильмов.
+        // Необходимо реализовать алгоритм k ближайших соседей для предсказания оценки, которую пользователь поставит определенному фильму на основе оценок его k ближайших соседей.
+        Hashtable<String, double[]> myfilms = new Hashtable<>();
+        double[] paramsFilm= new double[]{2,2,5,4,3};
+        myfilms.put("film", paramsFilm);
+        KNearest meFilms = new KNearest(myfilms, "film");
+        meFilms.searchNearest();
+        System.out.println(meFilms);
     }
 
 }
