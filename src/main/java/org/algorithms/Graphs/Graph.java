@@ -66,6 +66,162 @@ public class Graph {
         }
         return searchQueue;
     }
+    public void countComp (){
+        System.out.println(countConnectedComponents(graph));
+
+////        int[] arr = toIntArrFromQueue();
+////        quickSort(arr, 0, arr.length-1);
+////        System.out.println(Arrays.toString(arr));
+//          int count = 0;
+//          HashSet<String> keys = new HashSet<>();
+//        for (Map.Entry<String, String[]> entry : graph.entrySet()) {
+//            int innercount = 0;
+//            for (int i = 0; i< entry.getValue().length; i++){
+//                if (graph.get(entry.getValue()[i]).length == 0){
+//                    innercount++;
+//
+//                }
+//
+//            }
+//            System.out.println(innercount);
+//            if (innercount == entry.getValue().length){
+//                keys.add(entry.getKey());
+//            }
+//
+//
+//        }
+////        for (int i=getMin(arr); i< arr.length; i++){
+////            if (arr[i] == i && arr[i+1] != i+1){
+////                count++;
+////            } else if (arr[i] != i) {
+////                count++;
+////            }
+////            else if (arr[i+1] != i+1){
+////                count++;
+////            }
+////        }
+//          System.out.println(count + " " + keys);
+//          return count;
+    }
+    public static int countConnectedComponents(Hashtable<String, String[]> graph) {
+        HashSet<String> visited = new HashSet<>();
+        int count = 0;
+        for (String node : graph.keySet()) {
+            if (!visited.contains(node)) {
+                bfsForCount(graph, node, visited);
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private static void bfsForCount(Hashtable<String, String[]> graph, String start, HashSet<String> visited) {
+        Queue<String> queue = new LinkedList<>();
+        queue.add(start);
+        visited.add(start);
+        while (!queue.isEmpty()) {
+            String current = queue.poll();
+            String[] neighbors = graph.get(current);
+            if (neighbors != null) {
+                for (String neighbor : neighbors) {
+                    if (!visited.contains(neighbor)) {
+                        visited.add(neighbor);
+                        queue.add(neighbor);
+                    }
+                }
+            }
+        }
+    }
+    private int[] toIntArrFromQueue(){
+        int[] arr = new int[searchQueue.size()];
+        int i =0;
+        for (String entry : searchQueue){
+            arr[i] = Integer.valueOf(entry);
+            i++;
+        }
+        return arr;
+    }
+    private int[] toIntArrFromStr(String[] arrS){
+        int[] arr = new int[arrS.length];
+        for (int i =0; i< arr.length;i++){
+            arr[i] = Integer.valueOf(arrS[i]);
+        }
+        return arr;
+    }
+    public static int[] quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int pi = pivot(arr, low, high);
+
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+        return arr;
+    }
+    private static int pivot(int[] arr, int less, int greater) {
+        int middle = less + (greater - less) / 2;
+        int pivot = arr[middle];
+
+        // Обмен опорного элемента с последним
+        int temp = arr[middle];
+        arr[middle] = arr[greater];
+        arr[greater] = temp;
+        int i = (less - 1);
+        for (int j = less; j < greater; j++) {
+            if (arr[j] < pivot) {
+                i++;
+
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        temp = arr[i + 1];
+        arr[i + 1] = arr[greater];
+        arr[greater] = temp;
+        return i + 1;
+    }
+    private int getMin(int[] arr){
+        int min = 100000;
+        for (int i=0; i<arr.length;i++){
+            if (arr[i]<min ) {
+                min =arr[i];
+            }
+        }
+        System.out.println(min);
+        return min;
+    }
+    public String[] quickSortString(String[] arr, int low, int high){
+        if (low < high) {
+            int pi = pivotString(arr, low, high);
+
+            quickSortString(arr, low, pi - 1);
+            quickSortString(arr, pi + 1, high);
+        }
+        return arr;
+    }
+    private int pivotString(String[] arr, int less, int greater){
+        int middle = less + (greater - less) / 2;
+        String pivot = arr[middle];
+
+        // Обмен опорного элемента с последним, чтобы использовать существующую логику
+        String temp = arr[middle];
+        arr[middle] = arr[greater];
+        arr[greater] = temp;
+        int i = (less - 1);
+        for (int j = less; j < greater; j++) {
+            if (arr[j].compareToIgnoreCase(pivot) < 0) {
+                i++;
+
+                temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        temp = arr[i + 1];
+        arr[i + 1] = arr[greater];
+        arr[greater] = temp;
+        return i + 1;
+    }
     public ArrayDeque<String> toDecqueByPoint(String person) {
 
         for (Map.Entry<String, String[]> entry : graph.entrySet()) {
@@ -192,6 +348,24 @@ public class Graph {
             node = findLowestCostNode(costs, processed);
         }
     }
+    public void DijkstrasMinus() {
+        ArrayList<String> processed = new ArrayList<>();
+        String node = findLowestCostNode(costs, processed);
+        while (node != null) {
+            double cost = costs.get(node);
+            Hashtable<String, Integer> neighbors = graphTable.get(node);
+            for (Map.Entry<String, Integer> entry : neighbors.entrySet()) {
+                double new_cost = cost + entry.getValue();
+                if (costs.get(entry.getKey()) > new_cost) {
+                    costs.put(entry.getKey(), new_cost);
+                    parents.put(entry.getKey(), node);
+                }
+            }
+            processed.addLast(node);
+            node = findLowestCostNode(costs, processed);
+        }
+    }
+
 
     private String findLowestCostNode(Hashtable<String, Double> costs, ArrayList<String> processed) {
         double min = Double.POSITIVE_INFINITY;

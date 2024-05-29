@@ -72,10 +72,5 @@ public class GreedyMain {
         rangesOtr.add(ValueRange.of(20,100));
         Greedy rangeOtr = new Greedy(mainRangeOtrez, rangesOtr, true);
         System.out.println(rangeOtr);
-
-
-
-
-
     }
 }
