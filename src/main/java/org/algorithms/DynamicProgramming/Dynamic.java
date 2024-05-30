@@ -80,7 +80,6 @@ public class Dynamic {
             }
             System.out.println(" ");
         }
-        System.out.println(finalWay);
     }
 
     int[][] backpackDP() {
@@ -121,7 +120,7 @@ public class Dynamic {
             wv[i][j] = vals[0];
             i++;
         }
-        arrToString(wv);
+        //arrToString(wv);
         for (int k = 0; k <= wv.length - 1; k++) {
             weight[k] = wv[k][0];
             value[k] = wv[k][1];

@@ -15,7 +15,7 @@ public class KNearest {
     String typeOfSearch;
 
     public KNearest(Hashtable<String, double[]> iris, String typeflowerOrfilm) {
-        if (typeflowerOrfilm.toLowerCase() == "flower"){
+        if (typeflowerOrfilm.equalsIgnoreCase("flower")){
             this.typeOfSearch = typeflowerOrfilm;
             System.out.println(typeOfSearch);
             double[] setosair = new double[]{5.1, 3.5, 1.4, 0.2};
@@ -26,7 +26,7 @@ public class KNearest {
             this.libObj.put("virginica", virginica);
             this.object = iris;
         }
-        else if (typeflowerOrfilm.toLowerCase() == "film"){
+        else if (typeflowerOrfilm.equalsIgnoreCase("film")){
             //комедия/боевик/драма/ужасы/мелодрама
             this.typeOfSearch = typeflowerOrfilm;
             System.out.println(typeOfSearch);
@@ -37,6 +37,25 @@ public class KNearest {
             double[] morpheus = new double[]{2,5,1,3,1};
             this.libObj.put("morpheus", morpheus);
             this.object = iris;
+        } else if (typeflowerOrfilm.equalsIgnoreCase("flat")) {
+            //площадь
+            //минуты до центра
+            //количество комнат
+            //этаж
+            this.typeOfSearch = typeflowerOrfilm;
+            System.out.println(typeOfSearch);
+            double[] studiaNord = new double[]{23.9, 22, 0, 10};
+            this.libObj.put("3 322 100", studiaNord);
+            double[] odnushka = new double[]{25.9,25,1,16};
+            this.libObj.put("3 534 600", odnushka);
+            double[] dvushka = new double[]{48.4,40,2,1};
+            this.libObj.put("5 662 800", dvushka);
+            double[] trashka = new double[]{68.1,35,3,17};
+            this.libObj.put("7 116 450", trashka);
+            this.object = iris;
+        }
+        else {
+            System.out.println("Выберите второй параметр как: flower / film / flat");
         }
 
     }
@@ -49,13 +68,23 @@ public class KNearest {
             }
 
         }
-        return String.format("""   
+        if (!typeOfSearch.equals("flat"))
+        {
+            return String.format("""   
                 Больше всего похож на: %s.
-                будет иметь параметры: %s. 
+                Который имеет набор таких параметров: %s.
                 """,
-                nearest,
-                Arrays.toString(prdskazocenka)
-                );
+                    nearest,
+                    Arrays.toString(prdskazocenka)
+            );
+        }
+        else {
+            return String.format("""
+                    Цена будет приближена к %s.
+                    """,
+                    nearest);
+        }
+
     }
     public void searchNearest() {
 

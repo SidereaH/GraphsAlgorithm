@@ -4,6 +4,7 @@ import java.util.Hashtable;
 
 public class KNearestMain {
     public static void main(String[] args) {
+        System.out.println("1. Задача классификации цветков ириса");
         Hashtable<String, double[]> iris = new Hashtable<>();
 
         //1. Задача классификации цветков ириса: дан набор данных с
@@ -33,7 +34,7 @@ public class KNearestMain {
           KNearest newIris = new KNearest(iris, "flower");
           newIris.searchNearest();
           System.out.println(newIris);
-
+        System.out.println("2. Задача рекомендации фильмов ");
         //2. Задача рекомендации фильмов: дан набор данных с оценками пользователей для различных фильмов.
         // Необходимо реализовать алгоритм k ближайших соседей для предсказания оценки, которую пользователь поставит определенному фильму на основе оценок его k ближайших соседей.
         Hashtable<String, double[]> myfilms = new Hashtable<>();
@@ -42,6 +43,18 @@ public class KNearestMain {
         KNearest meFilms = new KNearest(myfilms, "film");
         meFilms.searchNearest();
         System.out.println(meFilms);
+        System.out.println("3. Задача прогнозирования цены на недвижимость ");
+        //дан набор данных с информацией о различных параметрах недвижимости (площадь, расположение, количество комнат и т.д.) и их ценой. Необходимо реализовать алгоритм k ближайших соседей для предсказания цены неизвестного объекта недвижимости на основе аналогичных объектов из обучающего набора данных.
+        Hashtable<String, double[]> flats = new Hashtable<>();
+        //площадь
+        //минуты до центра
+        //количество комнат
+        //этаж
+        double[] paramsFlat = new double[]{34.6,28,1,5};
+        flats.put("flat", paramsFlat);
+        KNearest meFlats = new KNearest(flats, "flat");
+        meFlats.searchNearest();
+        System.out.println(meFlats);
     }
 
 }
