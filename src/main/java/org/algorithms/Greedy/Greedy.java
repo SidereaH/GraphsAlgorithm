@@ -1,10 +1,7 @@
 package org.algorithms.Greedy;
 
 import java.time.temporal.ValueRange;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Greedy {
     HashSet<String> states_needed;
@@ -19,6 +16,9 @@ public class Greedy {
     Hashtable<String, HashSet<Integer>> rangesGiven = new Hashtable<>();
 
     boolean isInterval;
+    Hashtable<String, Item> items;
+    int capacity;
+
 
 
     public Greedy(ValueRange mainRange, HashSet<ValueRange> ranges, boolean isInterval) {
@@ -31,6 +31,11 @@ public class Greedy {
         this.states_needed = states_needed;
         this.stations = stations;
     }
+    public Greedy(int capacity, Hashtable<String, Item> items){
+        this.capacity = capacity;
+        this.items = items;
+    }
+
 
     public String toString() {
         if (states_needed != null) {
@@ -140,6 +145,35 @@ public class Greedy {
             }
             states_needed.removeAll(statesCovered);
             final_stations.add(bestStation);
+        }
+    }
+    public void greedyBag() {
+        // Создаем список элементов из Hashtable
+        List<Item> itemList = new ArrayList<>(items.values());
+
+        // Сортируем предметы по убыванию плотности стоимости
+        Collections.sort(itemList, Comparator.comparingDouble(item -> -item.valueDensity));
+
+        double totalValue = 0;
+        int usedCapacity = 0;
+        Hashtable<String, Item> selectedItems = new Hashtable<>();
+
+        for (Item item : itemList) {
+            if (usedCapacity + item.weight <= capacity) {
+                usedCapacity += item.weight;
+                totalValue += item.value;
+                selectedItems.put(item.toString(), item);
+            } else {
+                double remaining = capacity - usedCapacity;
+                totalValue += item.valueDensity * remaining;
+                break;
+            }
+        }
+
+        System.out.println("Максимальная стоимость: " + totalValue);
+        System.out.println("Выбранные предметы:");
+        for (Map.Entry<String, Item> entry : selectedItems.entrySet()) {
+            System.out.println("Вес: " + entry.getValue().weight + ", Стоимость: " + entry.getValue().value);
         }
     }
 }

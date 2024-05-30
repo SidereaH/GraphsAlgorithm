@@ -12,6 +12,7 @@ import java.util.Hashtable;
 
 public class GreedyMain {
     public static void main(String[] args) {
+        System.out.println("Задача о радиостаниях");
         HashSet<String> states_needed = new HashSet<>();
         states_needed.add("mt");
         states_needed.add("wa");
@@ -48,6 +49,7 @@ public class GreedyMain {
         Greedy state = new Greedy(states_needed, stations);
         System.out.println(state);
 
+        System.out.println("Задача об интервалах");
         //Задача об интервалах: дано множество интервалов на числовой прямой.
         //Необходимо выбрать минимальное подмножество интервалов так, чтобы все точки на числовой прямой были покрыты хотя бы одним из выбранных интервалов.
         ValueRange mainRange = ValueRange.of(0,20);
@@ -58,10 +60,10 @@ public class GreedyMain {
         ranges.add(ValueRange.of(10,20));
         ranges.add(ValueRange.of(1,2));
         ranges.add(ValueRange.of(20,100));
-        Greedy range = new Greedy(mainRange, ranges, false);
+        Greedy range = new Greedy(mainRange, ranges, true);
         System.out.println(range);
 
-        //
+        System.out.println("Задача об отрезках");
         ValueRange mainRangeOtrez = ValueRange.of(0,20);
         HashSet<ValueRange> rangesOtr = new HashSet<>();
         rangesOtr.add(ValueRange.of(0,3));
@@ -70,7 +72,18 @@ public class GreedyMain {
         rangesOtr.add(ValueRange.of(10,20));
         rangesOtr.add(ValueRange.of(1,2));
         rangesOtr.add(ValueRange.of(20,100));
-        Greedy rangeOtr = new Greedy(mainRangeOtrez, rangesOtr, true);
+        Greedy rangeOtr = new Greedy(mainRangeOtrez, rangesOtr, false);
         System.out.println(rangeOtr);
+        System.out.println("Задача о рюкзаке");
+        Hashtable<String, Item> items = new Hashtable<>();
+        items.put("item1", new Item(10, 60));
+        items.put("item2", new Item(20, 100));
+        items.put("item3", new Item(30, 120));
+        items.put("item4", new Item(15, 75));
+        items.put("item5", new Item(25, 90));
+
+        int capacity = 50;
+        Greedy bag = new Greedy(capacity, items);
+        bag.greedyBag();
     }
 }
